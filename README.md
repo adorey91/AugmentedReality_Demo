@@ -1,2 +1,0 @@
-# AugmentedReality_Demo
- 
