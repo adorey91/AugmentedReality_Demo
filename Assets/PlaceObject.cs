@@ -40,9 +40,14 @@ public class PlaceObject : MonoBehaviour
     {
         if (finger.index != 0) return;
 
-        if(arRayManager.Raycast(finger.currentTouch.screenPosition))
+        if(arRayManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon))
         {
+            foreach (var hit in hits)
+            {
+                Pose pose = hit.pose;
 
+                GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
+            }
         }
     }
 }
