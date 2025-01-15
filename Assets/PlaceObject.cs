@@ -11,9 +11,15 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class PlaceObject : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
+    [SerializeField] private Vector3 scaleChange = new Vector3(0.5f, 0.5f, 0.5f);
     private ARRaycastManager arRayManager;
     private ARPlaneManager arPlaneManager;
     private List<ARRaycastHit> hits = new();
+   [SerializeField] private bool isItemPlaced;
+    private Pose poseSaved;
+    private GameObject obj;
+    [SerializeField] private GameObject selectedObject = null;
+
 
 
     private void Awake()
@@ -21,6 +27,7 @@ public class PlaceObject : MonoBehaviour
         arPlaneManager = GetComponent<ARPlaneManager>();
         arRayManager = GetComponent<ARRaycastManager>();
     }
+
 
     private void OnEnable()
     {
@@ -40,14 +47,39 @@ public class PlaceObject : MonoBehaviour
     {
         if (finger.index != 0) return;
 
-        if(arRayManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon))
-        {
-            foreach (var hit in hits)
-            {
-                Pose pose = hit.pose;
+        Vector2 touchPosition = finger.currentTouch.screenPosition;
 
-                GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
+        Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+
+
+        if (arRayManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
+        {
+            if (!isItemPlaced)
+            {
+                Pose pose = hits[0].pose;
+                poseSaved = pose;
+
+                obj = Instantiate(prefab, pose.position, pose.rotation);
+                isItemPlaced = true;
             }
+
+
+            
+
+            //else
+            //{
+
+            //    if (hits[0].pose == poseSaved)
+            //    {
+            //        obj.transform.localScale += scaleChange;
+            //    }
+            //}
+            
+            //foreach (var hit in hits)
+            //{
+            //    Pose pose = hit.pose;
+            //GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
+            //}
         }
     }
 }
