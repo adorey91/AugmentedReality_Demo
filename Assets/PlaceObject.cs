@@ -50,7 +50,16 @@ public class PlaceObject : MonoBehaviour
         Vector2 touchPosition = finger.currentTouch.screenPosition;
 
         Ray ray = Camera.main.ScreenPointToRay(touchPosition);
+        if(Physics.Raycast(ray, out RaycastHit hit))
+        {
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 2.0f);
 
+            if (hit.collider.gameObject.CompareTag("Selectable"))
+            {
+                SelectObject(hit.collider.gameObject);
+                return;
+            }
+        }
 
         if (arRayManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
         {
@@ -60,11 +69,9 @@ public class PlaceObject : MonoBehaviour
                 poseSaved = pose;
 
                 obj = Instantiate(prefab, pose.position, pose.rotation);
+                obj.tag = "Selectable";
                 isItemPlaced = true;
             }
-
-
-            
 
             //else
             //{
@@ -81,5 +88,20 @@ public class PlaceObject : MonoBehaviour
             //GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
             //}
         }
+    }
+
+    private void SelectObject(GameObject obj)
+    {
+        // Deselect currently selected object (if any)
+        if (selectedObject != null)
+        {
+            selectedObject.GetComponent<Renderer>().material.color = Color.white;
+        }
+
+        // Select the new object
+        selectedObject = obj;
+
+        // Provide visual feedback
+        selectedObject.GetComponent<Renderer>().material.color = Color.green;
     }
 }

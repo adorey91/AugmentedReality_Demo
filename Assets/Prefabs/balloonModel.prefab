@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: balloonModel
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18c8f1410ccab2043b58e417a205b8ea,
+        type: 3}
+      propertyPath: m_TagString
+      value: Selectable
+      objectReference: {fileID: 0}
     - target: {fileID: 3556693616277986715, guid: 18c8f1410ccab2043b58e417a205b8ea,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -71,5 +76,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -2255248007331424131, guid: 18c8f1410ccab2043b58e417a205b8ea,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 117464525783551741}
   m_SourcePrefab: {fileID: 100100000, guid: 18c8f1410ccab2043b58e417a205b8ea, type: 3}
+--- !u!1 &4464987746803713372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2255248007331424131, guid: 18c8f1410ccab2043b58e417a205b8ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 6720898209892228385}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &117464525783551741
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4464987746803713372}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14681545
+  m_Height: 0.8199679
+  m_Direction: 1
+  m_Center: {x: -0.000000022351742, y: 0.40998396, z: 0.000000007450581}
