@@ -9,6 +9,14 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// </summary>
     public class ObjectSpawner : MonoBehaviour
     {
+        private GameObject m_LastSpawnedObject;
+
+        /// <summary>
+        /// The most recently spawned object.
+        /// </summary>
+        public GameObject lastSpawnedObject => m_LastSpawnedObject;
+
+
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
         Camera m_CameraToFace;
@@ -190,6 +198,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// Otherwise, it will spawn the prefab at the index.
         /// </remarks>
         /// <seealso cref="objectSpawned"/>
+       
         public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
         {
             if (m_OnlySpawnInView)
@@ -230,8 +239,10 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                 visualizationTrans.rotation = newObject.transform.rotation;
             }
 
+            m_LastSpawnedObject = newObject; // Store the reference to the last spawned object
             objectSpawned?.Invoke(newObject);
             return true;
         }
+
     }
 }
